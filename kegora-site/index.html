@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kegora Limited — Interior Design</title>
+<meta name="description" content="Kegora Limited creates thoughtful, minimal interiors for homes and businesses across Nigeria.">
+<link rel="icon" type="image/png" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --forest:#3a6b35;
+  --forest-deep:#2c5228;
+  --leaf:#4a8a42;
+  --earth:#b08d57;
+  --earth-light:#c9a96e;
+  --earth-pale:#ddc99b;
+  --sand:#f7f3ec;
+  --cream:#faf8f4;
+  --ink:#1e1e1a;
+  --charcoal:#2e2e28;
+  --muted:#8a857a;
+  --stone:#c4bdb0;
+  --display:'DM Serif Display',Georgia,serif;
+  --body:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--cream);color:var(--ink);overflow-x:hidden}
+section[id]{scroll-margin-top:72px}
+img{max-width:100%;display:block}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.9rem 5vw;
+  transition:all .4s;
+}
+nav.scrolled{background:rgba(250,248,244,.92);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--stone)}
+.nav-logo{height:50px;width:auto;object-fit:contain;transition:height .3s}
+nav.scrolled .nav-logo{height:40px}
+.nav-links{display:flex;gap:2rem;align-items:center;list-style:none}
+.nav-links a{
+  font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;position:relative;padding-bottom:3px;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;
+  background:var(--forest);transition:width .35s ease;
+}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a.active{color:var(--forest)}
+.nav-cta-btn{
+  padding:.55rem 1.4rem!important;border:1.5px solid var(--forest)!important;
+  border-radius:2px;transition:all .3s!important;color:var(--forest)!important;
+}
+.nav-cta-btn:hover{background:var(--forest);color:var(--cream)!important}
+.nav-cta-btn::after{display:none!important}
+.hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px;z-index:101}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all .3s}
+
+/* Mobile nav */
+.mobile-menu{
+  position:fixed;inset:0;background:var(--cream);z-index:99;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+  opacity:0;visibility:hidden;transform:translateY(-10px);
+  transition:opacity .35s ease,visibility .35s ease,transform .35s ease;
+}
+.mobile-menu.open{opacity:1;visibility:visible;transform:translateY(0)}
+.mobile-menu a{font-family:var(--display);font-size:1.6rem;color:var(--ink);text-decoration:none;transition:color .3s}
+.mobile-menu a.active{color:var(--forest)}
+.mobile-close{position:absolute;top:1.2rem;right:1.5rem;background:none;border:none;font-size:2rem;cursor:pointer;color:var(--ink);line-height:1;z-index:100}
+
+/* Hamburger X animation */
+.hamburger.is-open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.is-open span:nth-child(2){opacity:0}
+.hamburger.is-open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:6rem 5vw 4rem;position:relative;overflow:hidden;
+}
+.hero-content{max-width:560px;position:relative;z-index:2}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.65rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--forest);background:rgba(58,107,53,.08);
+  padding:.45rem 1rem;border-radius:100px;margin-bottom:2rem;
+  opacity:0;animation:fadeUp .7s ease .3s forwards;
+}
+.hero-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--forest)}
+.hero-title{
+  font-family:var(--display);font-size:clamp(2.4rem,5vw,4rem);
+  font-weight:400;line-height:1.12;margin-bottom:1.5rem;
+  opacity:0;animation:fadeUp .7s ease .5s forwards;
+}
+.hero-title .accent{color:var(--forest)}
+.hero-title em{font-style:italic;color:var(--earth)}
+.hero-sub{
+  font-size:.95rem;font-weight:300;color:var(--muted);
+  line-height:1.75;max-width:420px;margin-bottom:2.5rem;
+  opacity:0;animation:fadeUp .7s ease .7s forwards;
+}
+.hero-actions{
+  display:flex;gap:1rem;align-items:center;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .7s ease .9s forwards;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.85rem 2rem;background:var(--forest);color:#fff;
+  font-family:var(--body);font-size:.75rem;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;
+  border-radius:3px;transition:all .35s;
+}
+.btn-primary:hover{background:var(--forest-deep);transform:translateY(-1px)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.85rem 2rem;background:transparent;color:var(--ink);
+  font-family:var(--body);font-size:.75rem;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;text-decoration:none;border:1.5px solid var(--stone);
+  border-radius:3px;transition:all .35s;cursor:pointer;
+}
+.btn-secondary:hover{border-color:var(--ink)}
+
+/* Hero image */
+.hero-visual{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  width:46vw;max-width:680px;height:78vh;max-height:600px;overflow:hidden;z-index:1;
+}
+.hero-visual img{
+  width:100%;height:100%;object-fit:cover;
+  clip-path:polygon(15% 0,100% 0,100% 100%,0 100%);
+  opacity:0;animation:heroReveal 1.2s cubic-bezier(.25,.46,.45,.94) .4s forwards;
+}
+.hero-float-card{
+  position:absolute;bottom:10%;left:-2rem;z-index:3;
+  background:#fff;padding:1.2rem 1.5rem;border-radius:6px;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+  opacity:0;animation:fadeUp .7s ease 1.3s forwards;
+}
+.hero-float-card .hf-number{font-family:var(--display);font-size:2rem;color:var(--forest)}
+.hero-float-card .hf-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* ── MARQUEE ── */
+.marquee{padding:1.6rem 0;border-top:1px solid rgba(0,0,0,.06);border-bottom:1px solid rgba(0,0,0,.06);overflow:hidden}
+.marquee-inner{display:flex;gap:2.5rem;width:max-content;animation:scroll 22s linear infinite}
+.marquee-inner span{font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);white-space:nowrap}
+.marquee-inner .sep{color:var(--earth);font-size:.45rem;vertical-align:middle}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ── SHARED ── */
+.section-tag{font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--forest);margin-bottom:1rem}
+.section-title{font-family:var(--display);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:400;line-height:1.2;margin-bottom:3.5rem}
+
+/* ── SERVICES ── */
+.services{padding:6rem 5vw}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.service-item{
+  padding:2rem 1.5rem;border:1px solid rgba(0,0,0,.06);border-radius:6px;
+  position:relative;overflow:hidden;transition:all .4s;cursor:default;background:var(--cream);
+}
+.service-item:hover{border-color:var(--forest);transform:translateY(-4px);box-shadow:0 12px 30px rgba(58,107,53,.07)}
+.service-icon{
+  width:42px;height:42px;border-radius:50%;background:rgba(58,107,53,.07);
+  display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;transition:background .35s;
+}
+.service-item:hover .service-icon{background:var(--forest)}
+.service-icon svg{width:18px;height:18px;stroke:var(--forest);fill:none;stroke-width:1.5;transition:stroke .35s}
+.service-item:hover .service-icon svg{stroke:#fff}
+.service-item h3{font-family:var(--display);font-size:1.15rem;font-weight:400;margin-bottom:.6rem}
+.service-item p{font-size:.8rem;font-weight:300;color:var(--muted);line-height:1.65}
+
+/* ── PORTFOLIO ── */
+.portfolio{padding:6rem 5vw;background:var(--sand)}
+.portfolio-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+.portfolio-header .section-title{margin-bottom:0}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.portfolio-card{position:relative;overflow:hidden;border-radius:6px;aspect-ratio:4/5;cursor:pointer}
+.portfolio-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.25,.46,.45,.94)}
+.portfolio-card:hover img{transform:scale(1.06)}
+.portfolio-card .overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(30,30,26,.75) 0%,transparent 50%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;
+  opacity:0;transition:opacity .4s;
+}
+.portfolio-card:hover .overlay{opacity:1}
+.overlay h3{font-family:var(--display);font-size:1.2rem;color:#fff;margin-bottom:.2rem}
+.overlay span{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--earth-pale)}
+
+/* ── CRAFT / BEHIND THE SCENES ── */
+.craft{padding:6rem 5vw;overflow:hidden}
+.transform-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-bottom:4rem}
+.transform-card{position:relative;overflow:hidden;border-radius:6px}
+.transform-card img{width:100%;height:320px;object-fit:cover;display:block;transition:transform .6s ease}
+.transform-card:hover img{transform:scale(1.04)}
+.transform-label{
+  position:absolute;top:1rem;left:1rem;
+  font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  padding:.35rem .9rem;border-radius:100px;z-index:2;
+}
+.label-before{background:var(--sand);color:var(--muted)}
+.label-during{background:var(--earth);color:#fff}
+.label-after{background:var(--forest);color:#fff}
+.transform-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:1.2rem;background:linear-gradient(transparent,rgba(30,30,26,.7));color:var(--cream);
+}
+.transform-caption h4{font-family:var(--display);font-size:1.05rem;font-weight:400;margin-bottom:.15rem}
+.transform-caption span{font-size:.7rem;color:var(--stone)}
+.gallery-divider{display:flex;align-items:center;gap:1.5rem;margin-bottom:2.5rem}
+.gallery-divider span{font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--forest);white-space:nowrap}
+.gallery-divider::after{content:'';flex:1;height:1px;background:var(--stone)}
+.gallery-strip{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:.5rem;cursor:grab}
+.gallery-strip::-webkit-scrollbar{display:none}
+.gallery-thumb{flex:0 0 220px;height:290px;border-radius:6px;overflow:hidden;scroll-snap-align:start}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.gallery-thumb:hover img{transform:scale(1.06)}
+
+/* ── CTA ── */
+.cta{
+  padding:6rem 5vw;background:var(--charcoal);color:var(--cream);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:3rem;flex-wrap:wrap;position:relative;overflow:hidden;
+}
+.cta::before{content:'';position:absolute;right:-5rem;top:-5rem;width:300px;height:300px;border:1px solid rgba(255,255,255,.04);border-radius:50%}
+.cta::after{content:'';position:absolute;right:-2rem;top:-2rem;width:200px;height:200px;border:1px solid rgba(255,255,255,.04);border-radius:50%}
+.cta-text{max-width:520px;position:relative;z-index:1}
+.cta-text .section-tag{color:var(--earth-light)}
+.cta-text h2{font-family:var(--display);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:400;line-height:1.2;margin-bottom:1rem}
+.cta-text h2 em{color:var(--earth-light);font-style:italic}
+.cta-text p{font-size:.85rem;font-weight:300;color:var(--stone);line-height:1.7;margin-bottom:2rem}
+.btn-light{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.85rem 2rem;background:var(--earth);color:var(--ink);
+  font-family:var(--body);font-size:.75rem;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;border-radius:3px;transition:all .35s;
+}
+.btn-light:hover{background:var(--earth-light)}
+
+/* ── FOOTER ── */
+footer{padding:3rem 5vw 2rem;background:var(--ink);color:var(--cream)}
+.footer-inner{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;
+  padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.06);
+}
+.footer-brand{max-width:280px}
+.footer-logo{height:55px;width:auto;margin-bottom:1rem;filter:brightness(0) invert(1);opacity:.85}
+.footer-brand p{font-size:.8rem;font-weight:300;color:var(--stone);line-height:1.7}
+.footer-col h4{font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--earth-light);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-col a{font-size:.8rem;font-weight:300;color:var(--stone);text-decoration:none;transition:color .3s}
+.footer-col a:hover{color:var(--cream)}
+.footer-bottom{padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom span{font-size:.7rem;color:var(--muted)}
+.footer-socials{display:flex;gap:1.2rem}
+.footer-socials a{font-size:.7rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;transition:color .3s}
+.footer-socials a:hover{color:var(--earth-light)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heroReveal{from{opacity:0;clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%)}to{opacity:1;clip-path:polygon(15% 0,100% 0,100% 100%,0 100%)}}
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.25,.46,.45,.94)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+
+/* ── RESPONSIVE: TABLET ── */
+@media(max-width:1024px){
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-visual{width:42vw}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+
+/* ── RESPONSIVE: MOBILE ── */
+@media(max-width:768px){
+  nav{padding:.8rem 1.5rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+
+  .hero{
+    flex-direction:column;padding:6rem 1.5rem 2.5rem;
+    min-height:auto;gap:2rem;
+  }
+  .hero-content{max-width:100%}
+  .hero-visual{
+    position:relative;right:auto;top:auto;transform:none;
+    width:100%;max-width:100%;height:60vw;max-height:360px;
+    margin:0;
+  }
+  .hero-visual img{
+    clip-path:none;border-radius:8px;
+    opacity:1;animation:none;
+  }
+  .hero-float-card{bottom:1rem;left:1rem}
+
+  .services{padding:4rem 1.5rem}
+  .services-grid{grid-template-columns:1fr}
+
+  .portfolio{padding:4rem 1.5rem}
+  .portfolio-grid{grid-template-columns:1fr}
+  .portfolio-card{aspect-ratio:5/4}
+
+  .craft{padding:4rem 1.5rem}
+  .transform-row{grid-template-columns:1fr}
+  .transform-card img{height:260px}
+  .gallery-thumb{flex:0 0 170px;height:230px}
+
+  .cta{padding:4rem 1.5rem}
+
+  footer{padding:2.5rem 1.5rem 1.5rem}
+  .footer-inner{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+
+/* ── RESPONSIVE: SMALL PHONE ── */
+@media(max-width:480px){
+  .hero{padding-top:5.5rem}
+  .hero-title{font-size:2rem}
+  .hero-sub{font-size:.88rem}
+  .hero-actions{flex-direction:column;width:100%}
+  .hero-actions a{width:100%;justify-content:center;text-align:center}
+  .hero-visual{height:50vw;max-height:280px}
+  .hero-float-card{display:none}
+  .section-title{font-size:1.6rem}
+  .transform-card img{height:220px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#"><img src="images/logo.png" alt="Kegora Limited" class="nav-logo"></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#craft">Our craft</a></li>
+    <li><a href="#contact" class="nav-cta-btn">Get in touch</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-menu" id="mob">
+  <button class="mobile-close" aria-label="Close menu">&times;</button>
+  <a href="#services">Services</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#craft">Our craft</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Interior design studio</div>
+    <h1 class="hero-title">We design spaces<br>that feel like <em>you</em></h1>
+    <p class="hero-sub">Kegora Limited creates thoughtful, minimal interiors for homes and businesses across Nigeria — spaces where beauty meets purpose.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a consultation →</a>
+      <a href="#portfolio" class="btn-secondary">View our work</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="images/hero.jpg" alt="Modern living room interior by Kegora" loading="eager" fetchpriority="high" width="1400" height="763">
+    <div class="hero-float-card">
+      <div class="hf-number">150+</div>
+      <div class="hf-label">Projects completed</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee"><div class="marquee-inner">
+  <span>Residential</span><span class="sep">●</span>
+  <span>Commercial</span><span class="sep">●</span>
+  <span>Consultation</span><span class="sep">●</span>
+  <span>Furniture sourcing</span><span class="sep">●</span>
+  <span>Space planning</span><span class="sep">●</span>
+  <span>Bespoke interiors</span><span class="sep">●</span>
+  <span>Residential</span><span class="sep">●</span>
+  <span>Commercial</span><span class="sep">●</span>
+  <span>Consultation</span><span class="sep">●</span>
+  <span>Furniture sourcing</span><span class="sep">●</span>
+  <span>Space planning</span><span class="sep">●</span>
+  <span>Bespoke interiors</span><span class="sep">●</span>
+</div></div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <p class="section-tag reveal">What we do</p>
+  <h2 class="section-title reveal">Crafted for how<br>you live &amp; work</h2>
+  <div class="services-grid">
+    <div class="service-item reveal">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <h3>Residential interiors</h3>
+      <p>Full-service home design — living rooms, kitchens, bedrooms, and every corner in between.</p>
+    </div>
+    <div class="service-item reveal reveal-d1">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <h3>Commercial design</h3>
+      <p>Offices, co-working, and retail spaces designed to drive productivity and impress visitors.</p>
+    </div>
+    <div class="service-item reveal reveal-d2">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+      <h3>Consultation</h3>
+      <p>Expert guidance on layouts, palettes, materials, and spatial flow — fresh eyes for any space.</p>
+    </div>
+    <div class="service-item reveal reveal-d3">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
+      <h3>Furniture &amp; décor</h3>
+      <p>Curated sourcing of furniture, art, and lighting — locally crafted, internationally inspired.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="portfolio-header">
+    <div>
+      <p class="section-tag reveal">Selected work</p>
+      <h2 class="section-title reveal">Rooms with character</h2>
+    </div>
+  </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-card reveal">
+      <img src="images/lekki.jpg" alt="The Lekki Residence" loading="lazy" width="700" height="381">
+      <div class="overlay"><h3>The Lekki Residence</h3><span>Residential — Lagos</span></div>
+    </div>
+    <div class="portfolio-card reveal reveal-d1">
+      <img src="images/nexus.jpg" alt="Nexus Co-Working" loading="lazy" width="700" height="381">
+      <div class="overlay"><h3>Nexus Co-Working</h3><span>Commercial — Abuja</span></div>
+    </div>
+    <div class="portfolio-card reveal reveal-d2">
+      <img src="images/ivory.jpg" alt="Ivory Suite" loading="lazy" width="700" height="495">
+      <div class="overlay"><h3>Ivory Suite</h3><span>Residential — Ikoyi</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CRAFT / BEHIND THE SCENES -->
+<section class="craft" id="craft">
+  <div>
+    <p class="section-tag reveal">Behind the scenes</p>
+    <h2 class="section-title reveal">From bare floors<br>to beautiful spaces</h2>
+  </div>
+  <div class="transform-row">
+    <div class="transform-card reveal">
+      <span class="transform-label label-before">Before</span>
+      <img src="images/before.jpg" alt="Room before flooring installation" loading="lazy">
+      <div class="transform-caption"><h4>Bare subfloor</h4><span>Underlayment prep</span></div>
+    </div>
+    <div class="transform-card reveal reveal-d1">
+      <span class="transform-label label-during">During</span>
+      <img src="images/during.jpg" alt="SPC flooring installation in progress" loading="lazy">
+      <div class="transform-caption"><h4>Installation day</h4><span>SPC click flooring</span></div>
+    </div>
+    <div class="transform-card reveal reveal-d2">
+      <span class="transform-label label-after">After</span>
+      <img src="images/after.jpg" alt="Finished dark wood flooring" loading="lazy">
+      <div class="transform-caption"><h4>The reveal</h4><span>Dark walnut finish</span></div>
+    </div>
+  </div>
+  <div class="gallery-divider"><span>More of our work</span></div>
+  <div class="gallery-strip" id="galleryStrip">
+    <div class="gallery-thumb"><img src="images/g1.jpg" alt="Light oak flooring" loading="lazy"></div>
+    <div class="gallery-thumb"><img src="images/g2.jpg" alt="Staircase with LED lighting" loading="lazy"></div>
+    <div class="gallery-thumb"><img src="images/g3.jpg" alt="Dark floor living space" loading="lazy"></div>
+    <div class="gallery-thumb"><img src="images/g4.jpg" alt="Grey flooring bedroom" loading="lazy"></div>
+    <div class="gallery-thumb"><img src="images/g5.jpg" alt="Living room with rug" loading="lazy"></div>
+    <div class="gallery-thumb"><img src="images/g6.jpg" alt="Hallway flooring" loading="lazy"></div>
+    <div class="gallery-thumb"><img src="images/g7.jpg" alt="Flooring installation" loading="lazy"></div>
+    <div class="gallery-thumb"><img src="images/g8.jpg" alt="Materials preparation" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="cta-text">
+    <p class="section-tag">Start your project</p>
+    <h2>Ready to transform your space into something <em>extraordinary</em>?</h2>
+    <p>Tell us about your vision. We'll handle the rest — from concept to final styling.</p>
+    <a href="mailto:kegoraltd@gmail.com" class="btn-light">Book a free consultation →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Kegora Limited" class="footer-logo">
+      <p>Thoughtful interior design rooted in intention, refined by taste. Lagos, Nigeria.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#craft">Our craft</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:kegoraltd@gmail.com">kegoraltd@gmail.com</a></li>
+        <li><a href="tel:+2347066261881">+234 706 626 1881</a></li>
+          <li><a href="#">Lagos, Nigeria</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Social</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Pinterest</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Kegora Limited. All rights reserved.</span>
+    <div class="footer-socials">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav'),
+      mob=document.getElementById('mob'),
+      sections=document.querySelectorAll('section[id]'),
+      navLinks=document.querySelectorAll('.nav-links a[href^="#"]'),
+      mobLinks=document.querySelectorAll('#mob a[href^="#"]'),
+      allAnchors=document.querySelectorAll('a[href^="#"]');
+
+  // SPA smooth scroll
+  allAnchors.forEach(function(link){
+    link.addEventListener('click',function(e){
+      var href=this.getAttribute('href');
+      if(!href||href==='#')return;
+      var target=document.querySelector(href);
+      if(!target)return;
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth',block:'start'});
+      mob.classList.remove('open');hamburger.classList.remove('is-open');document.body.style.overflow='';
+      history.pushState(null,'',href);
+    });
+  });
+
+  // Mobile menu
+  var hamburger=document.getElementById('hamburger');
+  function openMobile(){mob.classList.add('open');hamburger.classList.add('is-open');document.body.style.overflow='hidden'}
+  function closeMobile(){mob.classList.remove('open');hamburger.classList.remove('is-open');document.body.style.overflow=''}
+  hamburger.addEventListener('click',function(){mob.classList.contains('open')?closeMobile():openMobile()});
+  mob.querySelector('.mobile-close').addEventListener('click',closeMobile);
+
+  // Scroll: nav bg + active links
+  function onScroll(){
+    nav.classList.toggle('scrolled',scrollY>60);
+    var current='';
+    sections.forEach(function(sec){if(scrollY>=sec.offsetTop-100)current=sec.id});
+    navLinks.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+current)});
+    mobLinks.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+current)});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  // Reveal on scroll
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(el){if(el.isIntersecting)el.target.classList.add('vis')});
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+
+  // Gallery drag scroll
+  var gs=document.getElementById('galleryStrip');
+  if(gs){
+    var d=false,sx,sl;
+    gs.addEventListener('mousedown',function(e){d=true;gs.style.cursor='grabbing';sx=e.pageX-gs.offsetLeft;sl=gs.scrollLeft});
+    gs.addEventListener('mouseleave',function(){d=false;gs.style.cursor='grab'});
+    gs.addEventListener('mouseup',function(){d=false;gs.style.cursor='grab'});
+    gs.addEventListener('mousemove',function(e){if(!d)return;e.preventDefault();gs.scrollLeft=sl-(e.pageX-gs.offsetLeft-sx)*1.5});
+  }
+
+  // Initial hash
+  if(location.hash){var t=document.querySelector(location.hash);if(t)setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'})},300)}
+})();
+</script>
+</body>
+</html>
